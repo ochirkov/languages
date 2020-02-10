@@ -1,0 +1,7 @@
+apiVersion: v1
+description: Languagewire Service
+name: languagewire
+version: 0.1.0
+maintainers:
+  - name: ochyrkov
+    email: ironloriin20@gmail.com

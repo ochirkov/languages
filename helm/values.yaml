@@ -1,0 +1,21 @@
+---
+
+image:
+  pullPolicy: Always
+  repository: 'ochirkov/languages'
+  tag: latest
+
+replicacount: 1
+
+resources:
+  requests:
+    memory: 50Mi
+    cpu: 10m
+
+service:
+  internalPort: 5000
+  externalPort: 5000
+
+scaling:
+  targetValue: 5
+  maxReplicas: 2
