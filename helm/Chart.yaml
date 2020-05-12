@@ -1,6 +1,6 @@
 apiVersion: v1
-description: Languagewire Service
-name: languagewire
+description: Languages Service
+name: languages
 version: 0.1.0
 maintainers:
   - name: ochyrkov

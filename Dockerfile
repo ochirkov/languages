@@ -6,18 +6,10 @@ ENV FLASK_APP=app.py
 
 WORKDIR /app
 
-RUN addgroup \
-    -g 1000  \
-    -S languagewire && \
-    adduser --gecos 'languagewire' \
-    -D -u 1000  \
-    -G languagewire languagewire
-
 COPY requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt && \
+    rm -f ./requirements.txt
 
-USER languagewire
-
-COPY . /app
+COPY app.py wsgi.py /app/
 
 CMD gunicorn -w 2 -b 0.0.0.0:5000 --access-logfile - wsgi

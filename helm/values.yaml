@@ -2,7 +2,7 @@
 
 image:
   pullPolicy: Always
-  repository: 'ochirkov/languages'
+  repository: 'loriin14/languages'
   tag: latest
 
 replicacount: 1
@@ -13,9 +13,29 @@ resources:
     cpu: 10m
 
 service:
-  internalPort: 5000
-  externalPort: 5000
+  httpPort: 5000
 
 scaling:
   targetValue: 5
   maxReplicas: 2
+
+probes:
+  useProbes: true
+  probesDefinitions:
+    livenessProbe:
+      httpGet:
+        path: /
+        port: http
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 5
+    readinessProbe:
+      httpGet:
+        path: /
+        port: http
+      failureThreshold: 3
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 5

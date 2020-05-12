@@ -4,39 +4,23 @@ metadata:
   name: {{ template "fullname" . }}
   labels:
     app: {{ template "fullname" . }}
-    release: "{{ .Release.Name }}"
 spec:
   replicas: {{ .Values.replicacount }}
   selector:
     matchLabels:
       app: {{ template "fullname" . }}
-      release: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
         app: {{ template "fullname" . }}
-        release: "{{ .Release.Name }}"
     spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: {{ .Values.service.internalPort }}
-        livenessProbe:
-          httpGet:
-            path: /
-            port: {{ .Values.service.internalPort }}
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: {{ .Values.service.internalPort }}
-          failureThreshold: 3
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 5
+        - containerPort: http
+{{ if .Values.probes.useProbes }}
+{{ toYaml .Values.probes.probesDefinitions | indent 8 }}
+{{ end }}
+

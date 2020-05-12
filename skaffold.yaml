@@ -4,41 +4,6 @@ kind: Config
 
 
 profiles:
-  - name: prepare
-
-    deploy:
-      helm:
-
-        flags:
-          upgrade:
-            - --install
-
-        releases:
-        - name: nginx-ingress
-          chartPath: stable/nginx-ingress
-          namespace: default
-          version: 1.29.6
-          remote: true
-#          setValueTemplates:
-#            #"controller.metrics.serviceMonitor.enabled": "true"
-#            "controller.metrics.enabled": "true"
-#            "controller.metrics.prometheusRule.enabled": "true"
-
-        - name: prometheus-operator
-          chartPath: stable/prometheus-operator
-          namespace: default
-          version: 8.7.0
-          remote: true
-
-        - name: prometheus-adapter
-          chartPath: stable/prometheus-adapter
-          namespace: default
-          version: 2.0.1
-          remote: true
-          setValueTemplates:
-            "prometheus.url": "http://prometheus-operator-prometheus.monitoring.svc"
-            "prometheus.port": "9090"
-
   - name: languagewire
 
     build:
