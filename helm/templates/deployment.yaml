@@ -19,7 +19,8 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: http
+        - name: http
+          containerPort: {{ .Values.service.httpPort }}
 {{ if .Values.probes.useProbes }}
 {{ toYaml .Values.probes.probesDefinitions | indent 8 }}
 {{ end }}
