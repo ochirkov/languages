@@ -8,17 +8,8 @@ spec:
     kind: Deployment
     name: {{ template "fullname" . }}
   minReplicas: 1
-  maxReplicas: {{ .Values.scaling.maxReplicas }}
+  maxReplicas: {{ .Values.autoScaling.maxReplicas }}
+  behavior:
+{{ toYaml .Values.autoScaling.behavior | indent 4 }}
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 50
+{{ toYaml .Values.autoScaling.metrics | indent 4 }}

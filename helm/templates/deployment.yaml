@@ -16,12 +16,13 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+        imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
         ports:
         - name: http
           containerPort: {{ .Values.service.httpPort }}
+        resources:
+{{ toYaml .Values.deployment.resources | indent 10 }}
 {{ if .Values.probes.useProbes }}
 {{ toYaml .Values.probes.probesDefinitions | indent 8 }}
 {{ end }}
-
