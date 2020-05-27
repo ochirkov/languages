@@ -13,3 +13,5 @@ spec:
 {{ toYaml .Values.autoScaling.behavior | indent 4 }}
   metrics:
 {{ toYaml .Values.autoScaling.metrics | indent 4 }}
+
+# TODO: scaledown issue when use "apiVersion: autoscaling/v2beta2"

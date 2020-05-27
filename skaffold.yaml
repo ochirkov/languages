@@ -1,31 +1,25 @@
 ---
-apiVersion: "skaffold/v1beta11"
+apiVersion: "skaffold/v1beta15"
 kind: Config
 
 
 profiles:
   - name: languagewire
 
-    build:
-      local:
-        push: true
-      tagPolicy:
-        envTemplate:
-          template: "{{.IMAGE_NAME}}:latest"
-      artifacts:
-
-        - image: "gcr.io/technical-challenges/languagewire"
-          context: .
+#    build:
+#      local:
+#        push: true
+#      tagPolicy:
+#        envTemplate:
+#          template: "{{.IMAGE_NAME}}:latest"
+#      artifacts:
+#
+#        - image: "loriin14/languages"
+#          context: .
 
     deploy:
       helm:
-
-        flags:
-          upgrade:
-            - --install
-
         releases:
-
           - name: languagewire
             chartPath: helm/
             namespace: default
