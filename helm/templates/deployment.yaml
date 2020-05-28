@@ -6,6 +6,12 @@ metadata:
     app: {{ template "fullname" . }}
 spec:
   replicas: {{ .Values.replicacount }}
+  minReadySeconds: {{ .Values.deployment.minReadySeconds | default 60 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.strategy.maxSurge | default 1 }}
+      maxUnavailable: {{ .Values.deployment.strategy.maxUnavailable | default 0 }}
   selector:
     matchLabels:
       app: {{ template "fullname" . }}

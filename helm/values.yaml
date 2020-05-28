@@ -13,6 +13,10 @@ deployment:
     limits:
       memory: "150Mi"
       cpu: "500m"
+  strategy:
+    maxSurge:
+    maxUnavailable:
+  minReadySeconds:
 
 service:
   httpPort: 5000
