@@ -6,16 +6,16 @@ kind: Config
 profiles:
   - name: languages
 
-#    build:
-#      local:
-#        push: true
-#      tagPolicy:
-#        envTemplate:
-#          template: "{{.IMAGE_NAME}}:latest"
-#      artifacts:
-#
-#        - image: "loriin14/languages"
-#          context: .
+    build:
+      local:
+        push: true
+      tagPolicy:
+        envTemplate:
+          template: "{{.IMAGE_NAME}}:latest"
+      artifacts:
+
+        - image: "loriin14/languages"
+          context: .
 
     deploy:
       helm:
