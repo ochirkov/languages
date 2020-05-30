@@ -10,7 +10,12 @@ metadata:
     prometheus.io/scrape: "true"
     prometheus.io/port: "10254"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: languages-tls
   rules:
     - host: {{ .Values.ingress.host }}
       http:
